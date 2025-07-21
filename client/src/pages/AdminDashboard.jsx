@@ -13,7 +13,7 @@ export default function AdminDashboard() {
     try {
       const res = await API.get("/tasks/all");
       setTasks(res.data);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load tasks");
     } finally {
       setLoading(false);
@@ -27,7 +27,7 @@ export default function AdminDashboard() {
       const res = await API.post("/tasks", payload);
       setTasks(prev => [res.data, ...prev]);
       toast.success("Task created ✔️");
-    } catch (error) {
+    } catch {
       toast.error("Failed to create task");
     }
   };
@@ -38,7 +38,7 @@ export default function AdminDashboard() {
       const res = await API.put(`/tasks/${id}`, { completed: !task.completed });
       setTasks(prev => prev.map(t => (t._id === id ? res.data : t)));
       toast.success("Task updated ✔️");
-    } catch (error) {
+    } catch {
       toast.error("Failed to update task");
     }
   };
@@ -48,7 +48,7 @@ export default function AdminDashboard() {
       await API.delete(`/tasks/${id}`);
       setTasks(prev => prev.filter(t => t._id !== id));
       toast.success("Task deleted 🗑️");
-    } catch (error) {
+    } catch{
       toast.error("Failed to delete task");
     }
   };

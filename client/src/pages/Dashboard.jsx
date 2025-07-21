@@ -48,7 +48,7 @@ export default function DeveloperDashboard() {
             <div className="mb-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
             <h2 className="font-semibold text-green-900 dark:text-green-100">Developer View</h2>
             <p className="text-sm text-green-700 dark:text-green-300">
-                You can create, edit, and delete your own tasks. Total tasks {tasks.lenght}
+                You can create, edit, and delete your own tasks. Total tasks {tasks.length}
             </p>
             </div>
 
