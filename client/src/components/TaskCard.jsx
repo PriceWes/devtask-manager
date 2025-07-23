@@ -29,7 +29,7 @@ export default function TaskCard({ task, onToggle, onDelete }) {
                   variant={task.completed ? "outline" : "secondary"}
                   onClick={() => onToggle(task._id)}
                 >
-                    <ChechCircleIcon className="h-5 w-5" />
+                    <CheckCircleIcon className="h-5 w-5" />
                 </Button> 
                 <Button
                  size="icon"

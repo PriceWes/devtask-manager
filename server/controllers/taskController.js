@@ -14,6 +14,53 @@ exports.getMyTasks = async(req, res) => {
 
 //GET /api/tasks/all
 exports.getAllTasks = async(req, res) => {
-    const tasks = await Task.find().populate("owner", "email");
+    const tasks = await Task.find().populate("owner", "username email");
     res.json(tasks);
+};
+
+//PUT /api/tasks/:id
+exports.updateTask = async (req, res) => {
+    try {
+        const task = await Task.findById(req.params.id);
+
+        if(!task) {
+            return res.status(404).json({ message: "Task not found "});
+        }
+
+        //cheking if user owns the task or is admin
+        if(task.owner.toString() !== req.user.id && req.user.role !== "admin"){
+            return res.status(403).json({ message: "Not authorized to update this task "});
+        }
+
+        const updateTask = await Task.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+
+        res.json(updateTask);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+//Delete /api/tasks/:id
+exports.deleteTask = async (req, res) => {
+    try {
+        const task = await Task.findById(req.params.id);
+
+        if (!task){
+            return res.status(404).json({ message: "Task not found "});
+        }
+
+        //check if the user owns the task or is an admin
+        if (task.owner.toString() !== req.user.id && req.user.role !== "admin"){
+            return res.status(403).json({ message: "Not authorized to delete this task "});
+        }
+
+        await Task.findByIdAndDelete(req.params.id);
+        res.json({ message: "Task deleted successfully "});
+    } catch (error) {
+        res.status(400).json({ message: error.message});
+    }
 };
