@@ -44,7 +44,7 @@ export default function Navbar() {
                             </div>
                             </>
                         )}
-                        <DropdownMenuItem onclick={logout}>Logout</DropdownMenuItem>
+                        <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>

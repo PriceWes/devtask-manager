@@ -17,6 +17,10 @@ export default function Login() {
         setLoading(true);
         try {
             const res = await API.post("/auth/login", {email, password});
+
+             console.log("Login response:", res.data);
+
+
             localStorage.setItem("token", res.data.token);
             navigate("/dashboard");
             if (!res.data?.token){
