@@ -17,7 +17,7 @@ export default function Signup() {
         if (!username || !email || !password) return alert("All fields required");
         setLoading(true);
         try {
-            const res = await API.post("/autj/signup", {username, email, password});
+            const res = await API.post("/auth/signup", {username, email, password});
             localStorage.setItem("token", res.data.token);
             navigate("/dashboard");
         } catch (err) {
@@ -43,6 +43,7 @@ export default function Signup() {
                     <Input
                      type="email"
                      placeholder="Email"
+                     value={email}
                      onChange={e => setEmail(e.target.value)}
                     />
                     <Input

@@ -13,14 +13,14 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
 
     const handleLogin = async () => {
-        if (!email || !password) return alert("All filed required");
+        if (!email || !password) return alert("All fileds required");
         setLoading(true);
         try {
             const res = await API.post("/auth/login", {email, password});
             localStorage.setItem("token", res.data.token);
             navigate("/dashboard");
             if (!res.data?.token){
-                alert("LOgin failed: No Token");
+                alert("Login failed: No Token");
                 return;
             }
         } catch (err) {
